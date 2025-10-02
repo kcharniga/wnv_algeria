@@ -6,6 +6,8 @@ The file called “data.csv” includes: sample year, province, PRNT90 result (p
 
 The file called "severe_cases_data_table_s2.xlsx" contains the data on WNND cases from supplementary table 2. 
 
+The file called “posterior_samples.RDS” is a list of lists containing the posterior samples for the best-fitting serocatalytic models for each province (the vectors for each parameter have length equal to the number of post-warmup iterations times the number of chains). 
+
 We have included three R scripts and one Stan file. Note that these scripts will not run without the full dataset.
 - descriptive_analysis.R: this script contains univariable and multivariable analyses with logistic regression used to identify risk factors for WNV infection
 - serocatalytic_models.R: this script contains code for running the serocatalytic models with Rsero. Code for the “recent outbreak” model is located at the bottom of the script  
