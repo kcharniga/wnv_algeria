@@ -1,6 +1,12 @@
 # West Nile virus in Algeria
 
-This repository includes seroprevalence data on West Nile virus from Algeria used in the study “Patterns of Emergence and Circulation of West Nile Virus in Algeria” by Hachid et al. The data include: sample year, province, PRNT90 result (positive or negative), and age in 10-year groups. These data can be used to create the map of seroprevalence in Figure 1 and the seroprevalence with 95% confidence intervals by age group in Figure 2. More detailed data on patient ages have not be shared to maintain privacy.
+This repository includes data and code used in the study “Patterns of Emergence and Circulation of West Nile Virus in Algeria” by Hachid et al. 
+
+The file called “data.csv” includes: sample year, province, PRNT90 result (positive or negative), and age in 10-year groups. These data can be used to create the map of seroprevalence in Figure 1 and the seroprevalence with 95% confidence intervals by age group in Figure 2. More detailed data on patient ages have not be shared to maintain privacy.
+
+The file called "severe_cases_data_table_s2.xlsx" contains the data on WNND cases from supplementary table 2. 
+
+The file called “model_fits_nat_comms.RDS” is a list containing the serocatalytic model fits used to generate Figure 2 (colored lines and ribbons).
 
 We have included three R scripts and one Stan file. Note that these scripts will not run without the full dataset.
 - descriptive_analysis.R: this script contains univariable and multivariable analyses with logistic regression used to identify risk factors for WNV infection
