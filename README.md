@@ -8,9 +8,12 @@ The file called "severe_cases_data_table_s2.xlsx" contains the data on WNND case
 
 The file called “posterior_samples.RDS” is a list of lists containing the posterior samples for the best-fitting serocatalytic models for each province (the vectors for each parameter have length equal to the number of post-warmup iterations times the number of chains). 
 
-We have included three R scripts and one Stan file. Note that these scripts will not run without the full dataset.
+We have included six R scripts and one Stan file. Note that these scripts will not run without the full dataset.
 - descriptive_analysis.R: this script contains univariable and multivariable analyses with logistic regression used to identify risk factors for WNV infection
 - serocatalytic_models.R: this script contains code for running the serocatalytic models with Rsero. Code for the “recent outbreak” model is located at the bottom of the script  
 - compute_info_criteria2_function: this script makes a slight modification to the compute_info_criteria function in Rsero by allowing for moment matching (line 72) in the calculation of the PSIS-LOO
 - simple_model.stan: this script contains the code for the “recent outbreak” model in the paper
+- Fig 2 peer review.R: this script generates Figure 2 of the main text
+- custom plotting functions.R: this script is a customized version of the plotting function in Rsero
+- custom plotting functions simple.R: this script is also a customized version of the plotting function in Rsero. It is used for the output of the simple (recent outbreak) models.
 
