@@ -34,20 +34,20 @@ compute_information_criteria2 <- function(FOIfit,...){
   # posterior mean
   
   LogLikelihoodMean <- 0
-  P <- (colMeans(chains$P))
-  for (i in seq(1,N) ){
-    
-    age <- FOIfit$data$age[i]
-    age_group <- FOIfit$data$age_group[i]
-    cat <- category[i]
-    p <- P[age,age_group, cat]
-    
-    if(Y[i] == TRUE){
-      LogLikelihoodMean <- LogLikelihoodMean + log(sensitivity-p*(sensitivity+specificity-1) )
-    }else{
-      LogLikelihoodMean <- LogLikelihoodMean + log(1-sensitivity+p*(sensitivity+specificity-1) )
-    }
-  }
+  # P <- (colMeans(chains$P))
+  # for (i in seq(1,N) ){
+  #   
+  #   age <- FOIfit$data$age[i]
+  #   age_group <- FOIfit$data$age_group[i]
+  #   cat <- category[i]
+  #   p <- P[age,age_group, cat]
+  #   
+  #   if(Y[i] == TRUE){
+  #     LogLikelihoodMean <- LogLikelihoodMean + log(sensitivity-p*(sensitivity+specificity-1) )
+  #   }else{
+  #     LogLikelihoodMean <- LogLikelihoodMean + log(1-sensitivity+p*(sensitivity+specificity-1) )
+  #   }
+  # }
   
   LP <- rowSums(LogLikelihoods)
   # Compute the AIC
@@ -55,29 +55,29 @@ compute_information_criteria2 <- function(FOIfit,...){
   AIC <- -2*max(LP) +2*estimated_parameters
   
   # Compute the DIC
-  Dbar = -2*mean(LP)
-  Dthetabar = -2*LogLikelihoodMean
-  pD = Dbar-Dthetabar
-  
-  DIC = pD+Dbar 
+  #Dbar = -2*mean(LP)
+  #Dthetabar = -2*LogLikelihoodMean
+  #pD = Dbar-Dthetabar
+  #
+  #DIC = pD+Dbar 
   # Compute the WAIC
   #variance along the column. Each individual has its own variance measured over all sampled parameters 
   
-  V = ColVar(exp(LogLikelihoods))
-  pwaic = sum(V)
-  lpd = sum(log( colSums(exp(LogLikelihoods))/S))
-  WAIC <- -2*(lpd-pwaic)
+#  V = ColVar(exp(LogLikelihoods))
+#  pwaic = sum(V)
+#  lpd = sum(log( colSums(exp(LogLikelihoods))/S))
+#  WAIC <- -2*(lpd-pwaic)
   
   ## Compute the PSIS-LOO using the package loo
   PSIS_LOO = loo(FOIfit$fit, moment_match = TRUE)
   
   information_criteria <- list(AIC = AIC,
-                               DIC = DIC,
+ #                              DIC = DIC,
                                pD = pD,
                                Dbar=Dbar,
-                               WAIC = WAIC,
-                               pwaic = pwaic,
-                               lpd = lpd,
+ #                              WAIC = WAIC,
+ #                              pwaic = pwaic,
+ #                              lpd = lpd,
                                k = estimated_parameters,
                                MLE= max(LP),
                                PSIS_LOO=PSIS_LOO)
@@ -91,8 +91,8 @@ compute_information_criteria2 <- function(FOIfit,...){
 print.information_criteria <- function(x,...){
   
   cat(sprintf('AIC:  %f, MLE: %f, k:  %f\n' , x$AIC, x$MLE, x$k))
-  cat(sprintf('DIC:  %f, Dbar:  %f, pD:  %f\n' , x$DIC, x$Dbar, x$pD))
-  cat(sprintf('WAIC:  %f, pwaic:  %f, lpd: %f \n' , x$WAIC, x$pwaic, x$lpd))
+ # cat(sprintf('DIC:  %f, Dbar:  %f, pD:  %f\n' , x$DIC, x$Dbar, x$pD))
+ # cat(sprintf('WAIC:  %f, pwaic:  %f, lpd: %f \n' , x$WAIC, x$pwaic, x$lpd))
   cat(sprintf('looic:  %f, elpd_loo:  %f, p_loo: %f \n' , x$PSIS_LOO$looic, x$PSIS_LOO$elpd_loo, x$PSIS_LOO$p_loo))
   
 }
